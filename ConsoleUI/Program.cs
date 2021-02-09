@@ -13,25 +13,45 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-                     
+
+            CarTest();
+            //ColorTest();
+            //BrandTest();
+
             CarManager carManager = new CarManager(new EfCarDal());
-
-            foreach (var car in carManager.GetAll())
+            foreach (var car in carManager.GetCarDetails())
             {
-                 Console.WriteLine(car.Id);
+                Console.WriteLine(car.Id + "/" + car.BrandName + "/" + car.ColorName + "/" + car.ModelYear);
             }
-            carManager.Add(new Car {  DailyPrice = 0, ModelYear = 2015, Description = "Otomatik Vites" });
-
-
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
-            brandManager.Update(new Brand { BrandId = 5, BrandName = "a" });
-
-
-            ColorManager colorManager = new ColorManager(new EfColorDal());
-            colorManager.Add(new Color {  ColorName = "black" });
-            
-            
 
         }
+        private static void BrandTest()
+        {
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+            foreach (var brand in brandManager.GetAll())
+            {
+                Console.WriteLine(brand.BrandName);
+            }
+        }
+
+        private static void ColorTest()
+        {
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+            foreach (var color in colorManager.GetAll())
+            {
+                Console.WriteLine(color.ColorName);
+            }
+        }
+
+        private static void CarTest()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+            foreach (var car in carManager.GetCarDetails())
+            {
+                Console.WriteLine(car.Id + "/" + car.BrandName + "/" + car.ColorName + "/" + car.ModelYear);
+            }
+        }
+
+
     }
 }
