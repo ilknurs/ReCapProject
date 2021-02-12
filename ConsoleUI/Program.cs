@@ -17,12 +17,8 @@ namespace ConsoleUI
             CarTest();
             //ColorTest();
             //BrandTest();
-
-            CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarDetails())
-            {
-                Console.WriteLine(car.Id + "/" + car.BrandName + "/" + car.ColorName + "/" + car.ModelYear);
-            }
+            
+           
 
         }
         private static void BrandTest()
