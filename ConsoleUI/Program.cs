@@ -25,7 +25,7 @@ namespace ConsoleUI
                 BrandId = 5,
                 ColorId = 5
 
-            });
+            }); 
 
 
 
