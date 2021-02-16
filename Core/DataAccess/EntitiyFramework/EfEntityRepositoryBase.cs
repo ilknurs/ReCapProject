@@ -9,8 +9,8 @@ using System.Text;
 namespace Core.DataAccess.EntitiyFramework
 {
     public class EfEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity>
-        where TEntity : class, IEntity, new()
-        where TContext : DbContext, new()
+        where TEntity : class, IEntity,new()
+        where TContext : DbContext , new()
     {
         public void Add(TEntity entity)
         {
@@ -33,7 +33,7 @@ namespace Core.DataAccess.EntitiyFramework
             }
         }
          
-        public TEntity Get(Expression<Func<TEntity, bool>> filter)
+        public TEntity Get(Func<TEntity, bool> filter)
         {
             using (TContext context = new TContext())
             {
@@ -41,12 +41,8 @@ namespace Core.DataAccess.EntitiyFramework
             }
         }
 
-        public TEntity Get(Func<TEntity, bool> filter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
+       
+        public List<TEntity> GetAll(Func<TEntity, bool> filter = null)
         {
             using (TContext context = new TContext())
             {
@@ -55,12 +51,9 @@ namespace Core.DataAccess.EntitiyFramework
                     : context.Set<TEntity>().Where(filter).ToList();
             }
         }
+          
 
-        public List<TEntity> GetAll(Func<TEntity, bool> filter = null)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public void Update(TEntity entity)
         {
             using (TContext context = new TContext())
