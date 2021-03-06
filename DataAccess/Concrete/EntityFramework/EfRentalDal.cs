@@ -1,4 +1,4 @@
-﻿using Core.DataAccess.EntitiyFramework;
+﻿using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -19,7 +19,7 @@ namespace DataAccess.Concrete.EntityFramework
                 var result = from re in filter is null ? context.Rentals : context.Rentals.Where(filter)
                              join c in context.Cars on re.Id equals c.Id
                              join cu in context.Customers on re.CustomerId equals cu.CustomerId
-                             join u in context.Users on cu.UserId equals u.UserId
+                             join u in context.Users on cu.UserId equals u.Id
                              select new RentalDetailDto
                              { 
                                  RentalId = re.RentalId,
