@@ -23,7 +23,7 @@ namespace Core.Aspects.Autofac.Performance
 
         protected override void OnBefore(IInvocation invocation)
         {
-            _stopwatch.Start();
+           _stopwatch.Start();
         }
 
         protected override void OnAfter(IInvocation invocation)

@@ -38,14 +38,8 @@ namespace Business.Concrete
 
         public IDataResult<List<Color>> GetAll()
         {
-            if (true)
-            {
-                return new ErrorDataResult<List<Color>>(Messages.ErrorDataMessage);
-            }
-            //else
-            //{
-            //    return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), Messages.SuccessDataMessage);
-            //}
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), Messages.SuccessDataMessage);
+            
         }
 
         public IDataResult<Color> GetCarsByColorId(int ColorId)

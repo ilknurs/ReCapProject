@@ -26,9 +26,9 @@ namespace Business.Concrete
             _carImageDal = carImageDal;
         }
 
-        [SecuredOperation("carimage.add,moderator,admin")]
-        [CacheRemoveAspect("ICarImageService.Get")]
-        [ValidationAspect(typeof(CarImageValidator))]
+        //[SecuredOperation("carimage.add,moderator,admin")]
+       // [CacheRemoveAspect("ICarImageService.Get")]
+       // [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(IFormFile file, CarImage carImage)
         {
             try
@@ -53,8 +53,8 @@ namespace Business.Concrete
             }
         }
 
-        [SecuredOperation("carimage.delete,moderator,admin")]
-        [CacheRemoveAspect("ICarImageService.Get")]
+       // [SecuredOperation("carimage.delete,moderator,admin")]
+       // [CacheRemoveAspect("ICarImageService.Get")]
         public IResult Delete(CarImage carImage)
         {
             FileHelper.Delete(carImage.ImagePath);
@@ -72,14 +72,14 @@ namespace Business.Concrete
             return new SuccessDataResult<CarImage>(_carImageDal.Get(p => p.Id == ImageId));
         }
 
-        [SecuredOperation("carimage.update,moderator,admin")]
-        [CacheRemoveAspect("ICarImageService.Get")]
-        [ValidationAspect(typeof(CarImageValidator))]
+        // [SecuredOperation("carimage.update,moderator,admin")]
+        // [CacheRemoveAspect("ICarImageService.Get")]
+        // [ValidationAspect(typeof(CarImageValidator))]
+
         public IResult Update(IFormFile file, CarImage carImage)
         {
-            var oldPath = _carImageDal.Get(p => p.Id == carImage.Id).ImagePath;
-
-            carImage.ImagePath = FileHelper.Update(oldPath, file);
+            var oldpath = $@"{Environment.CurrentDirectory}\wwwroot{_carImageDal.Get(p => p.Id == carImage.Id).ImagePath}";
+            carImage.ImagePath = FileHelper.Update(oldpath, file);
             carImage.Date = DateTime.Now;
 
             _carImageDal.Update(carImage);
@@ -133,6 +133,11 @@ namespace Business.Concrete
             }
 
             return new SuccessDataResult<List<CarImage>>(CheckIfCarImageNull(carId).Data);
+        }
+
+        public IDataResult<List<CarImage>> GetImagesByCarId(int imageId)
+        {
+            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(c => c.Id == imageId));
         }
     }
 }

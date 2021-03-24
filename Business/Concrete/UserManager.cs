@@ -25,7 +25,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.UserAdded);
         }
 
-        [SecuredOperation("user.delete,moderator,admin")]
+        //[SecuredOperation("user.delete,moderator,admin")]
         public IResult Delete(User user)
         {
             _userDal.Delete(user);
@@ -52,7 +52,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
         }
 
-        [SecuredOperation("user.update,moderator,admin")]
+       // [SecuredOperation("user.update,moderator,admin")]
         public IResult Update(User user)
         {
             _userDal.Update(user);
